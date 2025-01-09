@@ -1,0 +1,1 @@
+Stats Inside is a flutter app for fantasy footbal managers, offering player and team statistics such as goals, assists, xG, xA, and heatmaps. It helps users make data-driven decisions when building their fantasy team, with an intuitive interface and easy navigation. 
