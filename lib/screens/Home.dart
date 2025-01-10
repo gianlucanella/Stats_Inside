@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stats_inside/utils/localization_service.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
               });
             },
             decoration: InputDecoration(
-              hintText: 'Cerca giocatori o squadre...',
+              hintText: LocalizationService().getString('find'),
               prefixIcon: Icon(Icons.search, color: Colors.black),
               border: InputBorder.none,
               contentPadding: EdgeInsets.symmetric(vertical: 8),
@@ -43,34 +44,34 @@ class _HomeScreenState extends State<HomeScreen> {
             DrawerHeader(
               decoration: BoxDecoration(color: Colors.grey[500]),
               child: Text(
-                'Menu',
+                LocalizationService().getString('menu'),
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
             ListTile(
               leading: Icon(Icons.person),
-              title: Text('Statistiche Giocatori'),
+              title: Text(LocalizationService().getString('stats_player')),
               onTap: () {
                 Navigator.pushNamed(context, '/PlayerStats');
               },
             ),
             ListTile(
               leading: Icon(Icons.groups),
-              title: Text('Statistiche Squadre'),
+              title: Text(LocalizationService().getString('stats_team')),
               onTap: () {
                 Navigator.pushNamed(context, '/TeamStats');
               },
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text('Impostazioni'),
+              title: Text(LocalizationService().getString('settings')),
               onTap: () {
                 Navigator.pushNamed(context, '/Settings');
               },
             ),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text('Informazioni'),
+              title: Text(LocalizationService().getString('about')),
               onTap: () {
                 Navigator.pushNamed(context, '/About');
               },
@@ -80,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: [
-          // Contenuto della home
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                 },
                 child: Container(
-                  color: Colors.black.withOpacity(0.5), // Sfondo semi-trasparente
+                  color: Colors.black.withOpacity(0.5),
                   child: Center(
                     child: Container(
                       width: double.infinity,

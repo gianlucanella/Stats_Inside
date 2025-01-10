@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stats_inside/screens/Home.dart';
 import 'package:stats_inside/screens/PlayerStats.dart';
 import 'package:stats_inside/screens/TeamStats.dart';
+import 'package:stats_inside/provider/players_provider.dart';
+import 'package:stats_inside/utils/localization_service.dart';
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalizationService().loadStrings('assets/lang/ita.json');
   runApp(const MyApp());
 }
 
@@ -12,41 +17,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Stats Inside',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(250, 1, 3, 17)),
-        useMaterial3: true,
-        
+    return ChangeNotifierProvider(
+      create: (context) => PlayersProvider(),
+      child: MaterialApp(
+        title: 'Stats Inside',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(250, 1, 3, 17)),
+          useMaterial3: true,
+        ),
+        initialRoute: '/',
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case '/':
+              return MaterialPageRoute(builder: (context) => HomeScreen());
+            case '/PlayerStats':
+              return MaterialPageRoute(builder: (context) => PlayersScreen());
+            case '/TeamStats':
+              return MaterialPageRoute(builder: (context) => TeamStatsScreen());
+            default:
+              return MaterialPageRoute(builder: (context) => HomeScreen()); // Fallback route
+          }
+        },
       ),
-      initialRoute: '/', // Entry point della tua app
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case '/':
-            return MaterialPageRoute(builder: (context) => HomeScreen());
-          case '/PlayerStats':
-            return MaterialPageRoute(builder: (context) => PlayerStatsScreen());
-          case '/TeamStats':
-            return MaterialPageRoute(builder: (context) => TeamStatsScreen());
-          default:
-            return MaterialPageRoute(builder: (context) => HomeScreen()); // Fallback route
-        }
-      },
     );
   }
 }
