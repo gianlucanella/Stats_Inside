@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stats_inside/screens/home.dart';
-
+import 'package:stats_inside/screens/Home.dart';
+import 'package:stats_inside/screens/PlayerStats.dart';
+import 'package:stats_inside/screens/TeamStats.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -34,8 +35,17 @@ class MyApp extends StatelessWidget {
         
       ),
       initialRoute: '/', // Entry point della tua app
-      routes: {
-        '/': (context) => HomeScreen(), // Rotta iniziale (HomePage)
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case '/':
+            return MaterialPageRoute(builder: (context) => HomeScreen());
+          case '/PlayerStats':
+            return MaterialPageRoute(builder: (context) => PlayerStatsScreen());
+          case '/TeamStats':
+            return MaterialPageRoute(builder: (context) => TeamStatsScreen());
+          default:
+            return MaterialPageRoute(builder: (context) => HomeScreen()); // Fallback route
+        }
       },
     );
   }
