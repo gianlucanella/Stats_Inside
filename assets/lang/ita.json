@@ -1,0 +1,11 @@
+{  
+        "menu": "Menu",
+        "home": "Home",
+        "about": "About",
+        "contact": "Contact",
+        "find": "Cerca squadra o giocatore..",
+        "stats_player": "Statistiche giocatore",
+        "stats_team": "Statistiche squadra",
+        "settings": "Impostazioni",
+        "players": "Giocatori"
+}
